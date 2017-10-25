@@ -1,0 +1,5 @@
+projectKey=org.sonarqube:javascript-eurobet
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/org.sonarqube:javascript-eurobet
+ceTaskId=AVezA6pjethboXA0xKXL
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVezA6pjethboXA0xKXL

@@ -1,0 +1,64 @@
+<div class="livescommesseelement">
+<sly data-sly-include="livescommessecomponent.html"></sly>
+<div class="box_container_scommesse" id="liveNowDiv" style="display: block;">
+    <div class="box_container_scommesse_titolo Live">
+    <h1>LIVE</h1>
+    <h2 class="headerLive_h1_descr">Scommesse aperte H24!</h2>
+    <!--
+    <div class="box_container_scommesse_titolo_icon">
+    <img src="http://img.eurobet.it/adynit/images/_newsite-14/images/box_container_scommesse_titolo_icon_live.png" width="21px" height="21px" />
+    </div>
+    -->
+    </div>
+
+    <div style="display: block;" id="betListHomeLiveGroup1" class="homeLiveList" style="display: none;">
+
+        <div class="riga_scommesse_evento">
+
+            <div class="info_scommessa_Live">
+                <img src="http://img.eurobet.it/adynit/images/Site_new/sportV2/icone_sport/discipline/icon_basket.png" width="14px" height="14px" style="padding-bottom: 3px;">
+                <img src="http://img.eurobet.it/adynit/images/_newsite-14/images/box_container_scommesse_info_icon_live.png" width="37px" height="19px">
+            </div>
+
+            {% for event in events %}
+            <br> <div class="info_scommessa" style="border: 1px solid grey;margin-bottom: 30px;margin-left: 10px;margin-right: 10px; font-size: 18px;">
+              <div class="scommessatoadd">
+                  <div class="mainlabel">
+                      <span>{{event.mainlabel}} &nbsp;</span>
+                  </div>
+                  <div class="team1">
+                        <span>{{event.team1.name}} {{event.team1.score}}&nbsp;</span>
+                  </div>
+                  <div class="team2">
+                      <span>{{event.team2.name}} {{event.team2.score}}&nbsp;</span>
+                  </div>
+
+                  <div class="time">
+                      <span>{{event.time}}</span>
+                  </div>
+
+                  <div class="elements">
+                      {% for quota in event.quota %}
+                      <div class="quotatoadd">
+                          <a href="#">
+                              {{quota.label}}:{{quota.value}} &nbsp;
+                          </a>
+                      </div>
+                      {% endfor %}
+                  </div>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.liveScommesse.initComponent('#betListHomeLiveGroup1');
+    });
+</script>
+
+
+</div>

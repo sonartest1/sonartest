@@ -1,0 +1,49 @@
+<script>
+    (function ($) {
+        if ($.leftmenu === undefined) {
+            $.leftmenu = {
+                templatefunction: null,
+                initComponent: function (id) {
+                    $.leftmenu.templatefunction = swig.compile($(id).html());
+                },
+                attachEvent: function () {
+                    $('.menu-item').click(function () {
+                        $(this).find('.menu-subitem').show();
+                    });
+                    $('.menu-subitem').click(function() {
+                       var code = $(this).data('menu-code');
+                        $.liveScommesse.refresh(code);
+                    });
+                },
+                refresh: function () {
+                    var myUrl = "http://localhost:8080/adobe-webapp/getMenuItems?callback=menuItemsCallback";
+                    
+                    $.ajax({
+                            crossDomain: true,
+                            type: "GET",
+                            contentType: "application/json",
+                            async: false,
+                            url: myUrl, 
+                            dataType: "jsonp"
+                           });
+                }
+            }
+        }
+    })(jQuery);
+    
+    function menuItemsCallback(result) {
+        $('.leftmenu').html($.leftmenu.templatefunction(result));
+        $.leftmenu.attachEvent();
+    }
+</script>
+
+<style>
+    .menu-subitem {
+        margin-top: 10px;
+        margin-bottom: 10px;
+     }
+    .leftmenu {
+        border: 1px solid;
+        margin-right: 90%;
+    }
+</style>

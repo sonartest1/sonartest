@@ -1,0 +1,52 @@
+<script>
+    (function ($) {
+        if ($.liveScommesse === undefined) {
+            $.liveScommesse = {
+                templatefunction: null,
+                initComponent: function (id) {
+                    $.liveScommesse.templatefunction = swig.compile($(id).html());
+                },
+                doRender: function(json) {
+                    console.log($(this));
+                    console.log("Callback result: " + json);
+                    $('#betListHomeLiveGroup1').html($.liveScommesse.templatefunction(json));
+                },
+                attachEvent: function () {
+                    $('.quotatoadd').click(function () {
+                        $.card.updateCard($(this).closest('.scommessatoadd'), $(this).text());
+                    });
+                },
+                refresh: function (code) {
+                   var myUrl = "http://localhost:8080/adobe-webapp/getQuotes?callback=quoteListCallback"+ '&countryCode=' + code;
+                    
+                    $.ajax({
+                            crossDomain: true,
+                            type: "GET",
+                            contentType: "application/json",
+                            async: false,
+                            url: myUrl, 
+                            dataType: "jsonp"
+                           });
+                }
+            }
+        }
+    })(jQuery);
+    
+    function quoteListCallback(result) {
+        $('#betListHomeLiveGroup1').html($.liveScommesse.templatefunction(result));
+        $('#betListHomeLiveGroup1').show();
+        $.liveScommesse.attachEvent();
+    }
+    
+    $.liveScommesse.refresh();
+    
+    //setInterval(function(){ $.liveScommesse.refresh();}, 5001);
+    
+</script>
+
+<style>
+    .livescommesseelement {
+        margin-left: 30%;
+        margin-right: 40%;
+     }
+</style>

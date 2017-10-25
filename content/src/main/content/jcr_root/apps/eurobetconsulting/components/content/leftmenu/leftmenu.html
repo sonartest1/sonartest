@@ -1,0 +1,25 @@
+<sly data-sly-include="leftmenuscript.html"></sly>
+<div class="leftmenu">
+    <div>
+        {% for item in menuItems%}
+            <div class="menu-item" data-menu-code="{{item.itemCode}}">
+                <a href="#">{{item.itemLabel}}</a>
+                <div class="menu-subitem" data-menu-code="{{item.itemCode}}" style="display: none">
+                    {% for subitem in item.subItems %}
+                        <a href="#" style="display: block">
+                            {{subitem.itemLabel}}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $.leftmenu.initComponent('.leftmenu');
+        $.leftmenu.refresh();
+        $.leftmenu.attachEvent();
+    });
+</script>

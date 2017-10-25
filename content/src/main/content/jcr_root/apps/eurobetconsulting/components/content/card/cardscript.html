@@ -1,0 +1,78 @@
+<script>
+    (function ($) {
+        if ($.card === undefined) {
+            $.card = {
+                templatefunction: null,
+                initComponent: function (id) {
+                    $.card.templatefunction = swig.compile($(id).html());
+                },
+                attachEvent: function () {
+                    $('.menu-item').click(function () {
+                        $(this).find('.menu-subitem').show();
+                    });
+                    $('.menu-subitem').click(function() {
+                       var code = $(this).data('menu-code');
+                        $.liveScommesse.refresh(code);
+                    });
+                },
+                updateCard: function (element, code) {
+                    //console.log(code);
+                    $('.card-entry-empty').hide();
+                    $('.card-entry').show();
+                    $(element).clone().appendTo($('.card-entry'));
+                    $('.card-entry').append('Choosed: '+  code);
+                },
+                refresh: function () {
+                   /* var myUrl = "http://localhost:8080/adobe-webapp/getQuotes?callback=myCallBack";
+                    
+                    $.ajax({
+                            crossDomain: true,
+                            type: "GET",
+                            contentType: "application/json",
+                            async: false,
+                            url: myUrl, 
+                            dataType: "jsonp"
+                           });
+                 */var json = {
+                        "menuItems": [{
+                            "itemLabel": "Italia",
+                            "itemCode": "ITA",
+                            "subItems": [{
+                                "itemLabel": "Serie A",
+                                "itemCode": "ITA"
+                            },
+                                {
+                                    "itemLabel": "Serie B",
+                                    "itemCode": "ITA"
+                                }]
+                        },
+                            {
+                                "itemLabel": "Inghilterra",
+                                "itemCode": "ENG",
+                                "subItems": [{
+                                    "itemLabel": "Premier League",
+                                    "itemCode": "ENG"
+                                }
+                                ]
+                            }
+                        ]
+                    };
+                    myCallBackcard(json);
+                }
+            }
+        }
+    })(jQuery);
+    
+    function myCallBackcard(result) {
+        $('.card').html($.card.templatefunction(result));
+    }
+</script>
+
+<style>
+    .card {
+       float: right;
+        border: 1px solid;
+        margin-top: -150px;
+        margin-right: 10%;
+     }
+</style>

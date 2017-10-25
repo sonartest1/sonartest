@@ -1,0 +1,20 @@
+<div id="base">
+
+<sly data-sly-resource="${'menu' @resourceType='eurobetconsulting/components/structure/menuglobal'}"></sly>
+
+<sly data-sly-resource="${'header' @ resourceType='eurobetconsulting/components/structure/header'}"></sly>
+
+</div>
+<div class="myparelement" style="
+    position: relative;
+    top: 250px;
+">
+    <sly data-sly-resource="${'leftmenu' @ resourceType='eurobetconsulting/components/content/leftmenu'}"></sly>
+    <sly data-sly-resource="${'leftmenu' @ resourceType='eurobetconsulting/components/content/card'}"></sly>
+    <main data-sly-resource="${'par' @ resourceType='wcm/foundation/components/parsys'}"></main>
+    <sly data-sly-resource="${'footer' @ resourceType='eurobetconsulting/components/structure/footer'}"></sly>
+
+</div>
+
+
+
